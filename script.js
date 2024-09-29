@@ -55,21 +55,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
     });
 
-    // REVIEW: コンタクトフォームの送信処理
-    const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-
-        // メール送信処理
-        const mailtoLink = `mailto:programminglesson132@gmail.com?subject=お問い合わせ&body=${encodeURIComponent(message)}%0A%0A送信者のメールアドレス: ${email}`;
-        window.location.href = mailtoLink;
-
-        alert('お問い合わせありがとうございます。メッセージが送信されました。');
-        contactForm.reset();
-    });
-
     // ハンバーガーメニューの開閉
     const hamburgerMenu = document.querySelector('.hamburger-menu');
     const navMenu = document.querySelector('nav ul');
