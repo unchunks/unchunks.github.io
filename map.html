@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>移動経路 表示サイト</title>
+    <style>
+        #map {
+            height: 93vh; /* ページ全体の高さにマップを表示 */
+            width: 100%;
+        }
+        #reel {
+            height: 7vh;
+            overflow-x: scroll;
+            white-space: nowrap;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+        .chunk-button {
+            display: inline-block;
+            padding: 10px;
+            margin-right: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .chunk-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5kXJS5NYHnLGaYvhBexafgmE0ZszroGQ"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDL5p8UEy4guu8sNCEwCIh8M-X8sV1Osj0",
+            authDomain: "route360-a3284.firebaseapp.com",
+            projectId: "route360-a3284",
+            storageBucket: "route360-a3284.appspot.com",
+            messagingSenderId: "770398813258",
+            appId: "1:770398813258:web:2797301af28903b8323ab3",
+            measurementId: "G-4VVHBSD4GN"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const dataRef = collection(db, 'locationHistory');
+
+        window.locations = [];
+        window.waypointChunks = [];
+
+        getDocs(dataRef).then((querySnapshot) => {
+            let nowIDLocation = [];
+            let nowID = "";
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                if (nowID === "") {
+                    nowID = doc.id;
+                }
+
+                if (nowID !== doc.id) {
+                    window.locations.push({ id: nowID, locations: nowIDLocation });
+                    nowIDLocation = [];
+                    nowID = doc.id;
+                }
+
+                Object.keys(data).forEach((key) => {
+                    if (data[key] && data[key].latitude && data[key].longitude) {
+                        nowIDLocation.push({ location: { lat: data[key].latitude, lng: data[key].longitude }, stopover: true });
+                    }
+                });
+            });
+
+            if (nowIDLocation.length > 0) {
+                window.locations.push({ id: nowID, locations: nowIDLocation });
+            }
+
+            window.waypointChunks = getWaypointChunks();
+            renderReel();
+        }).catch((error) => {
+            console.error('Error retrieving data:', error);
+        });
+
+        function renderReel() {
+            const reel = document.getElementById('reel');
+            reel.innerHTML = '';
+
+            window.waypointChunks.forEach((chunk, index) => {
+                const button = document.createElement('button');
+                button.className = 'chunk-button';
+                button.textContent = `Chunk ${index + 1}`;
+                button.onclick = () => initMap(index);
+                reel.appendChild(button);
+            });
+        }
+
+        function getWaypointChunks() {
+            if (!window.locations || window.locations.length === 0) {
+                console.error('No locations available to create chunks.');
+                return [];
+            }
+
+            const allChunks = [];
+            window.locations.forEach(locationData => {
+                const waypoints = locationData.locations;
+                const MAX_WAYPOINTS = 23;
+                for (let i = 0; i < waypoints.length; i += MAX_WAYPOINTS) {
+                    allChunks.push(waypoints.slice(i, i + MAX_WAYPOINTS));
+                }
+            });
+
+            return allChunks;
+        }
+    </script>
+    <script>
+        function initMap(chunkIndex = 0) {
+            const waypointChunks = window.waypointChunks;
+
+            if (waypointChunks.length === 0) {
+                console.error('No waypoint chunks available to display on the map.');
+                return;
+            }
+
+            const chunk = waypointChunks[chunkIndex];
+
+            if (!chunk || chunk.length === 0) {
+                console.error('Invalid chunk index or empty chunk.');
+                return;
+            }
+
+            var start = chunk[0].location;
+            var end = chunk[chunk.length - 1].location;
+            const waypoints = chunk.slice(1, chunk.length - 1);
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: start
+            });
+
+            var directionsService = new google.maps.DirectionsService();
+            var directionsRenderer = new google.maps.DirectionsRenderer({
+                suppressMarkers: true,
+                provideRouteAlternatives: false
+            });
+            directionsRenderer.setMap(map);
+
+            var request = {
+                origin: start,
+                destination: end,
+                waypoints: waypoints,
+                travelMode: 'DRIVING'
+            };
+
+            directionsService.route(request, function(result, status) {
+                if (status == 'OK') {
+                    directionsRenderer.setDirections(result);
+                    addMarkers(map, chunk);
+                } else {
+                    console.error('Directions request failed due to ' + status);
+                }
+            });
+        }
+
+        function addMarkers(map, chunk) {
+            chunk.forEach((point, index) => {
+                new google.maps.Marker({
+                    position: point.location,
+                    map: map,
+                    label: (index + 1).toString()
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="reel"></div>
+    <div id="map"></div>
+</body>
+</html>
