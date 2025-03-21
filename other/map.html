@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>移動経路 表示サイト</title>
     <style>
         #map {
-            height: 93vh; /* ページ全体の高さにマップを表示 */
+            height: 93vh;
+            /* ページ全体の高さにマップを表示 */
             width: 100%;
         }
+
         #reel {
             height: 7vh;
             overflow-x: scroll;
@@ -14,6 +17,7 @@
             background-color: #f1f1f1;
             padding: 10px;
         }
+
         .chunk-button {
             display: inline-block;
             padding: 10px;
@@ -23,6 +27,7 @@
             border: none;
             cursor: pointer;
         }
+
         .chunk-button:hover {
             background-color: #0056b3;
         }
@@ -154,7 +159,7 @@
                 travelMode: 'DRIVING'
             };
 
-            directionsService.route(request, function(result, status) {
+            directionsService.route(request, function (result, status) {
                 if (status == 'OK') {
                     directionsRenderer.setDirections(result);
                     addMarkers(map, chunk);
@@ -175,8 +180,10 @@
         }
     </script>
 </head>
+
 <body>
     <div id="reel"></div>
     <div id="map"></div>
 </body>
+
 </html>
