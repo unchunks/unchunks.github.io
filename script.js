@@ -3,18 +3,17 @@ function loadCommonElements() {
     const footer = document.getElementById('site-footer');
 
     header.innerHTML = `
-        <div class="logo">unchunks</div>
-        <nav>
-            <div class="hamburger-menu">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-            </div>
+        <img src="https://unchunks.github.io/images/unchunks_logo_55_9.svg" width="220" height="36" alt="unchunksのロゴ">
+
+        <div class="hamburger-menu" id="hamburger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="menu-content">
             <ul>
-                <li><a href="/index.html#about">自己紹介</a></li>
-                <li><a href="/index.html#projects">プロジェクト</a></li>
-                <li><a href="/index.html#news">ニュース</a></li>
-                <li><a href="/index.html#contact">お問い合わせ</a></li>
+                <li><a href="index.html">HOME</a></li>
+                <!-- <li><a href="works.html">WORKS</a></li> -->
             </ul>
         </nav>
     `;
@@ -22,10 +21,10 @@ function loadCommonElements() {
     footer.innerHTML = `
         <div class="social-links">
             <a href="https://x.com/unchunks_dev" target="_blank" rel="noopener noreferrer" style="padding-right: 10px;">
-                <img src="/images/x_icon.svg" alt="X (旧Twitter)" width="24" height="24">
+                <img src="https://unchunks.github.io/images/x_icon.svg" alt="X (旧Twitter)" width="24" height="24">
             </a>
             <a href="https://github.com/unchunks" target="_blank" rel="noopener noreferrer" style="padding-left: 10px;">
-                <img src="/images/github_icon.svg" alt="GitHub" width="24" height="24">
+                <img src="https://unchunks.github.io/images/github_icon.svg" alt="GitHub" width="24" height="24">
             </a>
         </div>
         <p>&copy; ${new Date().getFullYear()} unchunks. All rights reserved.</p>
@@ -81,5 +80,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 }
             });
         });
+    });
+});
+
+$(function () {
+    $('.hamburger-menu').on('click', function () {
+        // ボタンがアクティブ状態かどうかを確認
+        if (this.classList.contains('active')) {
+            // アクティブから非アクティブに変更する場合
+            this.classList.add('closing');    // closingクラスを追加（閉じるアニメーション用）
+            this.classList.remove('active');  // activeクラスを削除
+
+            // アニメーションが終わったらclosingクラスを削除
+            setTimeout(() => {
+                this.classList.remove('closing');
+            }, 500); // アニメーションの時間（0.5秒）と同じ
+        } else {
+            // 非アクティブからアクティブに変更する場合
+            this.classList.add('active');  // activeクラスを追加
+        }
     });
 });
