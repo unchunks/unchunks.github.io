@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Via Lactea - unchunks</title>
+    <link rel="stylesheet" href="https://unchunks.github.io/style.css">
+</head>
+
+<body>
+    <header id="site-header"></header>
+    <main>
+        <article>
+            <h1>VIA LACTEA</h1>
+            <p>ドット絵調のイラストを用いたレトロな2Dシューティングゲーム。ハイスコアを目指せ！</p>
+            <p class="date">2025年4月4日</p>
+
+            <h2>ゲーム仕様</h2>
+            <h3>基本操作</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>操作</th>
+                        <th>キー</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>左</td>
+                        <td>A または ←</td>
+                    </tr>
+                    <tr>
+                        <td>右</td>
+                        <td>D または →</td>
+                    </tr>
+                    <tr>
+                        <td>上</td>
+                        <td>W または ↑</td>
+                    </tr>
+                    <tr>
+                        <td>下</td>
+                        <td>S または ↓</td>
+                    </tr>
+                    <tr>
+                        <td>発射</td>
+                        <td>スペースキー</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>目的</h2>
+            <ul>
+                <li>敵を倒してハイスコアを目指す</li>
+                <li>ボスを倒す</li>
+            </ul>
+
+            <h2>駆け引きの要素</h2>
+            <ul>
+                <li>敵の種類によって倒したときのスコアが異なる</li>
+                <li>スコアが低い敵ほど出現頻度が高い</li>
+                <li>ボスを倒すとゲームクリアだが、それ以上スコアが伸ばせない</li>
+            </ul>
+
+            <h2>キャラクターの仕様</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>見た目</th>
+                        <th>スコア</th>
+                        <th>体力</th>
+                        <th>サイズ</th>
+                        <th>スピード</th>
+                        <th>弾速</th>
+                        <th>出現頻度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PLAYER</td>
+                        <td><img src="https://unchunks.github.io/projects/ViaLactea/image/player.png"></td>
+                        <td>3</td>
+                        <td>30</td>
+                        <td>10</td>
+                        <td>15</td>
+                        <td>-</td>
+                        <td>STOP</td>
+                    </tr>
+                    <tr>
+                        <td>STOP</td>
+                        <td><img src="https://unchunks.github.io/projects/ViaLactea/image/stop.png"></td>
+                        <td>40</td>
+                        <td>5</td>
+                        <td>40</td>
+                        <td>0</td>
+                        <td>8</td>
+                        <td>34.25</td>
+                    </tr>
+                    <tr>
+                        <td>STRAIGHT</td>
+                        <td><img src="https://unchunks.github.io/projects/ViaLactea/image/straight.png"></td>
+                        <td>50</td>
+                        <td>5</td>
+                        <td>40</td>
+                        <td>5</td>
+                        <td>15</td>
+                        <td>27.4</td>
+                    </tr>
+                    <tr>
+                        <td>ZIGZAG</td>
+                        <td><img src="https://unchunks.github.io/projects/ViaLactea/image/zigzag.png"></td>
+                        <td>80</td>
+                        <td>8</td>
+                        <td>40</td>
+                        <td>5</td>
+                        <td>15</td>
+                        <td>17.125</td>
+                    </tr>
+                    <tr>
+                        <td>FAST</td>
+                        <td><img src="https://unchunks.github.io/projects/ViaLactea/image/fast.png"></td>
+                        <td>200</td>
+                        <td>3</td>
+                        <td>30</td>
+                        <td>10</td>
+                        <td>30</td>
+                        <td>6.85</td>
+                    </tr>
+                    <tr>
+                        <td>BOSS</td>
+                        <td><img src="https://unchunks.github.io/projects/ViaLactea/image/boss.png"></td>
+                        <td>1000</td>
+                        <td>30</td>
+                        <td>80</td>
+                        <td>3</td>
+                        <td>15</td>
+                        <td>0.274</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>アイテム</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>見た目</th>
+                        <th>効果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BULLET</td>
+                        <td><img src="https://unchunks.github.io/projects/ViaLactea/image/bullet.png"></td>
+                        <td>5秒間プレイヤーの発射する弾が3方向に増える</td>
+                    </tr>
+                    <tr>
+                        <td>HEAL</td>
+                        <td><img src="https://unchunks.github.io/projects/ViaLactea/image/heal.png"></td>
+                        <td>体力を1回復する</td>
+                    </tr>
+                    <tr>
+                        <td>SPEED</td>
+                        <td><img src="https://unchunks.github.io/projects/ViaLactea/image/speed.png"></td>
+                        <td>スピードが永続的に5上昇する</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="news-content">
+                <a href="https://github.com/unchunks/VIA-LACTEA" class="btn">ソースコード</a>
+
+                <!-- <h2>プロジェクトの概要</h2>
+                <p>新プロジェクトは、プレイヤーの創造性と戦略的思考を融合させた新しいジャンルのゲームを目指しています。現時点で以下の特徴を予定しています：</p>
+                <ul>
+                    <li>プレイヤーがモンスターとして冒険者からダンジョンを守るユニークなゲームプレイ</li>
+                    <li>プレイヤーの戦略によって成長するモンスターと冒険者</li>
+                </ul>
+
+                <h2>開発スケジュール</h2>
+                <p>現在、プロジェクトは企画段階にあり、今後1年間で基本的なゲームシステムの開発を進める予定です。ベータテストは2025年夏頃を予定しており、正式リリースは2026年を目指しています。</p>
+
+                <h2>まだ見ぬファンの皆様へ</h2>
+                <p>このプロジェクトは私が初めて発表するものです。当然ファンなどいるはずもないのですが、今後の私の活動を見て、楽しみにしていただければと思います。</p> -->
+            </div>
+            <a href="https://unchunks.github.io/index.html#projects" class="btn">プロジェクト一覧に戻る</a>
+        </article>
+    </main>
+    <footer id="site-footer"></footer>
+    <script src="https://unchunks.github.io/script.js"></script>
+</body>
+
+</html>
