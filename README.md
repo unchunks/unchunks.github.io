@@ -34,26 +34,34 @@ npm run build
 
 ## カスタマイズ
 
-`src/data.js` を編集するだけで、サイトのコンテンツを簡単に更新できます。
-- **Profile**: 名前、役職、自己紹介、SNSリンク
-- **Projects**: プロジェクトの追加・削除
-- **Posts**: 新しいブログ記事の追加
+サイトのコンテンツは `src/content` ディレクトリ内のファイルを編集することで更新できます。
+
+- **Profile**: `src/data.jsx` の `profile` セクション
+- **Projects**: `src/content/projects/` ディレクトリ内の各ファイル
+- **Posts**: `src/content/posts/` ディレクトリ
+
+### 新しいプロジェクトの追加方法
+
+1. `src/content/projects/` に新しいファイル（例: `mygame.jsx`）を作成します。
+2. 既存のファイルを参考に、プロジェクトデータを記述・エクスポートします。
+3. `src/data.jsx` を開き、作成したファイルをインポートして `projects` リストに追加します。
+
+```javascript
+import { mygame } from './content/projects/mygame';
+
+// ...
+
+projects: [
+    // ...
+    mygame,
+],
+```
 
 ### 新しい記事の追加方法
 
-1. `src/data.js` を開きます。
-2. `posts` 配列を見つけます。
-3. 以下のような形式で、新しい記事データを追加してください（IDは他と被らないユニークな数字にしてください）。
+1. `src/content/posts/` に新しいファイルを作成します。
+2. `src/content/posts/index.js` でそのファイルをインポートし、`posts` 配列に追加します。
 
-```javascript
-{
-    id: 104, // 新しいID
-    title: "新しい記事のタイトル",
-    date: "2023-12-01",
-    category: "DevLog",
-    content: "ここに記事の本文を書きます..."
-}
-```
 
 保存すると、サイトに自動的に反映されます。
 
