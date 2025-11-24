@@ -185,7 +185,7 @@ const Blog = () => {
                 <h2 className="text-3xl font-bold text-white flex items-center gap-3">
                     <Code className="text-emerald-500" /> DevLog
                 </h2>
-                <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">View All Logs &rarr;</a>
+                <Link to="/blog" className="text-sm text-slate-400 hover:text-white transition-colors">View All Logs &rarr;</Link>
             </div>
 
             <div className="space-y-4">

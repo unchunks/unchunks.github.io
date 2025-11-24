@@ -15,8 +15,8 @@ export const SITE_DATA = {
         role: "Game Developer / Technical Artist",
         bio: "「コードで世界を描く」をモットーに、UnityとUnreal Engineでアクションゲームを中心に開発しています。シェーダー魔法使いを目指して修行中。",
         social: {
-            github: "https://github.com",
-            twitter: "https://twitter.com",
+            github: "https://github.com/unchunks",
+            twitter: "https://x.com/unchunks",
         }
     },
     // プロジェクト（ゲーム）リスト
