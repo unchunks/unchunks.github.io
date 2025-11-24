@@ -1,47 +1,67 @@
-# Indie Dev Zero Portfolio
+# Indie Dev Zero ポートフォリオ
 
-This is a portfolio website built with React, Vite, and Tailwind CSS.
+React, Vite, Tailwind CSS で構築されたポートフォリオサイトです。
 
-## Getting Started
+## 始め方
 
-### Prerequisites
-- Node.js (v18 or later recommended)
+### 前提条件
+- Node.js (v18 以降を推奨)
 
-### Installation
-1. Clone the repository:
+### インストール
+1. リポジトリをクローンします:
    ```bash
    git clone https://github.com/unchunks/unchunks.github.io.git
    cd unchunks.github.io
    ```
-2. Install dependencies:
+2. 依存関係をインストールします:
    ```bash
    npm install
    ```
 
-### Development
-Start the local development server:
+### 開発（ローカル実行）
+ローカル開発サーバーを起動します:
 ```bash
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+ブラウザで [http://localhost:5173](http://localhost:5173) を開いて確認できます。
 
-### Building
-Build the project for production:
+### ビルド
+本番用にプロジェクトをビルドします:
 ```bash
 npm run build
 ```
-The output will be in the `dist` directory.
+出力ファイルは `dist` ディレクトリに生成されます。
 
-## Customization
+## カスタマイズ
 
-You can easily update the site content by editing `src/data.js`.
-- **Profile**: Name, role, bio, social links.
-- **Projects**: Add or remove projects.
-- **Posts**: Add new blog posts.
+`src/data.js` を編集するだけで、サイトのコンテンツを簡単に更新できます。
+- **Profile**: 名前、役職、自己紹介、SNSリンク
+- **Projects**: プロジェクトの追加・削除
+- **Posts**: 新しいブログ記事の追加
 
-## Deployment
+### 新しい記事の追加方法
 
-This project is configured to automatically deploy to GitHub Pages using GitHub Actions.
-Any push to the `main` branch will trigger a deployment.
+1. `src/data.js` を開きます。
+2. `posts` 配列を見つけます。
+3. 以下のような形式で、新しい記事データを追加してください（IDは他と被らないユニークな数字にしてください）。
 
-Ensure your repository settings are configured to serve from the `gh-pages` branch (or whichever branch the action deploys to, usually `gh-pages` created by the action).
+```javascript
+{
+    id: 104, // 新しいID
+    title: "新しい記事のタイトル",
+    date: "2023-12-01",
+    category: "DevLog",
+    content: "ここに記事の本文を書きます..."
+}
+```
+
+保存すると、サイトに自動的に反映されます。
+
+## デプロイ（公開）
+
+このプロジェクトは、GitHub Actions を使用して GitHub Pages に自動デプロイされるように設定されています。
+`main` ブランチにプッシュすると、自動的にデプロイ処理が開始されます。
+
+### 注意点
+GitHub Pages の設定で、デプロイ元（Source）が **"GitHub Actions"** になっていることを確認してください。
+（設定 > Pages > Build and deployment > Source）
