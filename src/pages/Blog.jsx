@@ -102,7 +102,7 @@ const Blog = () => {
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center gap-3">
                         <Code className="text-emerald-500" /> DevLog Archive
                     </h1>
-                    <p className="text-slate-400 text-lg">開発の記録とテクニカルな学びを共有しています。</p>
+                    <p className="text-slate-400 text-lg">開発の記録と学びを共有しています。</p>
                 </div>
 
                 {/* Category Filter */}
@@ -113,8 +113,8 @@ const Blog = () => {
                                 key={category}
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedCategory === category
-                                        ? 'bg-emerald-500 text-white'
-                                        : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                                    ? 'bg-emerald-500 text-white'
+                                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                                     }`}
                             >
                                 {category}

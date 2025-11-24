@@ -11,9 +11,9 @@ import { posts } from './content/posts';
  */
 export const SITE_DATA = {
     profile: {
-        name: "Indie Dev Zero",
-        role: "Game Developer / Technical Artist",
-        bio: "「コードで世界を描く」をモットーに、UnityとUnreal Engineでアクションゲームを中心に開発しています。シェーダー魔法使いを目指して修行中。",
+        name: "unchunks",
+        role: "Game Developer",
+        bio: "ストレスフリーに楽しく遊べるゲームを目指して、Unity、UnrealEngineなどで開発しています。ゲーム会社に就職することを目標に奮闘中。",
         social: {
             github: "https://github.com/unchunks",
             twitter: "https://x.com/unchunks",
@@ -21,7 +21,7 @@ export const SITE_DATA = {
     },
     // プロジェクト（ゲーム）リスト
     projects: [
-        eneme,
+        // eneme,
         rogue,
         vialactea,
         // 新しいプロジェクトを追加する場合は、

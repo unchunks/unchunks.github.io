@@ -102,7 +102,7 @@ const Projects = () => {
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 flex items-center gap-3">
                         <Gamepad2 className="text-emerald-500" /> All Projects
                     </h1>
-                    <p className="text-slate-400 text-lg">ゲーム開発プロジェクトとテクニカルアートの作品集</p>
+                    <p className="text-slate-400 text-lg">ゲーム開発プロジェクトの作品集</p>
                 </div>
 
                 {/* Tag Filter */}
@@ -113,8 +113,8 @@ const Projects = () => {
                                 key={tag}
                                 onClick={() => setSelectedTag(tag)}
                                 className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedTag === tag
-                                        ? 'bg-emerald-500 text-white'
-                                        : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                                    ? 'bg-emerald-500 text-white'
+                                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
                                     }`}
                             >
                                 {tag}

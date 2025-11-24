@@ -1,4 +1,4 @@
-# Indie Dev Zero ポートフォリオ
+# unchunks ポートフォリオ
 
 React, Vite, Tailwind CSS で構築されたポートフォリオサイトです。
 
