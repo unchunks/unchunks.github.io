@@ -21,10 +21,10 @@ const Navigation = () => {
 
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-8">
-                            <a href="/#projects"
-                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</a>
-                            <a href="/#blog"
-                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">DevLog</a>
+                            <Link to="/projects"
+                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</Link>
+                            <Link to="/blog"
+                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">DevLog</Link>
                             <a href="/#contact"
                                 className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
                         </div>
@@ -44,10 +44,10 @@ const Navigation = () => {
             {isOpen && (
                 <div className="md:hidden bg-slate-900 border-b border-slate-800">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <a href="/#projects"
-                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-                        <a href="/#blog"
-                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">DevLog</a>
+                        <Link to="/projects"
+                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</Link>
+                        <Link to="/blog"
+                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">DevLog</Link>
                         <a href="/#contact"
                             className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
                     </div>
@@ -77,11 +77,11 @@ const Hero = () => {
                         {SITE_DATA.profile.bio}
                     </p>
                     <div className="flex gap-4">
-                        <a href="#projects"
+                        <Link to="/projects"
                             className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium transition-all hover:translate-y-[-2px] flex items-center gap-2">
                             View Projects
                             <ChevronRight size={18} />
-                        </a>
+                        </Link>
                         <a href={SITE_DATA.profile.social.github} target="_blank" rel="noopener noreferrer"
                             className="bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-lg font-medium transition-all border border-slate-700 flex items-center gap-2">
                             <Github size={18} /> GitHub
