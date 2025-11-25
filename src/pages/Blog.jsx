@@ -21,9 +21,9 @@ const Navigation = () => {
 
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-8">
-                            <Link to="/#projects" className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</Link>
+                            <Link to="/projects" className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">All Projects</Link>
                             <Link to="/blog" className="text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">DevLog</Link>
-                            <Link to="/#contact" className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</Link>
+                            <Link to="/contact" className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</Link>
                         </div>
                     </div>
 
@@ -39,9 +39,9 @@ const Navigation = () => {
             {isOpen && (
                 <div className="md:hidden bg-slate-900 border-b border-slate-800">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <Link to="/#projects" className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</Link>
+                        <Link to="/projects" className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">All Projects</Link>
                         <Link to="/blog" className="text-emerald-400 block px-3 py-2 rounded-md text-base font-medium">DevLog</Link>
-                        <Link to="/#contact" className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
+                        <Link to="/contact" className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
                     </div>
                 </div>
             )}
@@ -148,7 +148,7 @@ const Blog = () => {
                 ) : (
                     <div className="text-center py-20">
                         <p className="text-slate-400 text-lg">まだ記事がありません。</p>
-                        <p className="text-slate-500 mt-2">新しい記事は <code className="bg-slate-800 px-2 py-1 rounded">src/content/posts/</code> で追加できます。</p>
+                        {/* <p className="text-slate-500 mt-2">新しい記事は <code className="bg-slate-800 px-2 py-1 rounded">src/content/posts/</code> で追加できます。</p> */}
                     </div>
                 )}
             </main>

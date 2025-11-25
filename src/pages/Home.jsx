@@ -22,11 +22,11 @@ const Navigation = () => {
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-8">
                             <Link to="/projects"
-                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</Link>
+                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">All Projects</Link>
                             <Link to="/blog"
                                 className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">DevLog</Link>
-                            <a href="/#contact"
-                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                            <Link to="/contact"
+                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</Link>
                         </div>
                     </div>
 
@@ -45,11 +45,11 @@ const Navigation = () => {
                 <div className="md:hidden bg-slate-900 border-b border-slate-800">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <Link to="/projects"
-                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</Link>
+                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">All Projects</Link>
                         <Link to="/blog"
                             className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">DevLog</Link>
-                        <a href="/#contact"
-                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                        <Link to="/contact"
+                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
                     </div>
                 </div>
             )}
@@ -79,7 +79,7 @@ const Hero = () => {
                     <div className="flex gap-4">
                         <Link to="/projects"
                             className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium transition-all hover:translate-y-[-2px] flex items-center gap-2">
-                            View Projects
+                            View All Projects
                             <ChevronRight size={18} />
                         </Link>
                         <a href={SITE_DATA.profile.social.github} target="_blank" rel="noopener noreferrer"
@@ -126,13 +126,13 @@ const Hero = () => {
 const Projects = () => {
     return (
         <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-            <div className="flex items-center gap-4 mb-12">
+            <div className="flex items-center justify-between mb-12">
                 <h2 className="text-3xl font-bold text-white">Selected Projects</h2>
-                <div className="h-px bg-slate-800 flex-grow"></div>
+                <Link to="/projects" className="text-sm text-slate-400 hover:text-white transition-colors">View All Projects &rarr;</Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {SITE_DATA.projects.map((project) => (
+                {SITE_DATA.projects.slice(0, 3).map((project) => (
                     <div key={project.id}
                         className="group bg-slate-900 rounded-xl overflow-hidden border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1">
                         <div className={`h-48 bg-gradient-to-br ${project.imageColor} flex items-center justify-center relative

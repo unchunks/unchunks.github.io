@@ -16,7 +16,13 @@ export const SITE_DATA = {
         bio: "ストレスフリーに楽しく遊べるゲームを目指して、Unity、UnrealEngineなどで開発しています。ゲーム会社に就職することを目標に奮闘中。",
         social: {
             github: "https://github.com/unchunks",
-            twitter: "https://x.com/unchunks",
+            twitter: "https://x.com/unchunks_dev",
+        },
+        stores: {
+            steam: "https://store.steampowered.com/developer/unchunks", // Placeholder
+            itchio: "https://unchunks.itch.io", // Placeholder
+            googleplay: "",
+            appstore: "",
         }
     },
     // プロジェクト（ゲーム）リスト

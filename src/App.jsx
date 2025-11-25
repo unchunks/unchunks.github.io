@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
 import Projects from './pages/Projects';
 import Blog from './pages/Blog';
+import Contact from './pages/Contact';
 import './index.css';
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/projects/:id" element={<ProjectDetail />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/contact" element={<Contact />} />
             </Routes>
         </Router>
     );
