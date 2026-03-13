@@ -1,259 +1,249 @@
-import React, { useState } from 'react';
-import { Gamepad2, Code, Terminal, ExternalLink, Github, Twitter, ChevronRight, Calendar, Menu, X } from 'lucide-react';
+/**
+ * src/pages/Home.jsx
+ * トップページ
+ * セクションは各コンポーネントに分割されています。
+ */
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { SITE_DATA } from '../data';
+import { ChevronRight, Github } from 'lucide-react';
+import { PageLayout }    from '../components/common/PageLayout';
+import { Button }        from '../components/ui/Button';
+import { SectionHeader } from '../components/ui/SectionHeader';
+import { ProjectCard }   from '../components/ui/ProjectCard';
+import { SkillBar }      from '../components/ui/SkillBar';
+import { StatBox }       from '../components/ui/StatBox';
+import { TerminalCard, T } from '../components/ui/TerminalCard';
+import { useReveal }     from '../hooks/useReveal';
+import { SITE_DATA }     from '../data';
 
-const Navigation = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
+/* ── Hero ──────────────────────────────────────── */
+function Hero() {
+    const ref = useReveal();
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <div className="flex items-center gap-2">
-                        <Link to="/" className="flex items-center gap-2">
-                            <Gamepad2 className="w-6 h-6 text-emerald-400" />
-                            <span className="font-bold text-xl text-white tracking-wider font-mono">
-                                {SITE_DATA.profile.name}
-                            </span>
-                        </Link>
-                    </div>
-
-                    <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-8">
-                            <Link to="/projects"
-                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">All Projects</Link>
-                            <Link to="/blog"
-                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">DevLog</Link>
-                            <Link to="/contact"
-                                className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</Link>
-                        </div>
-                    </div>
-
-                    <div className="md:hidden">
-                        <button onClick={() => setIsOpen(!isOpen)} className="text-slate-300 hover:text-white p-2">
-                            {isOpen ?
-                                <X /> :
-                                <Menu />}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden bg-slate-900 border-b border-slate-800">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <Link to="/projects"
-                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">All Projects</Link>
-                        <Link to="/blog"
-                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">DevLog</Link>
-                        <Link to="/contact"
-                            className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
-                    </div>
-                </div>
-            )}
-        </nav>
-    );
-};
-
-const Hero = () => {
-    return (
-        <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <section id="hero" className="pt-36 pb-20 px-4 sm:px-8 max-w-6xl mx-auto" ref={ref}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+                {/* Left */}
                 <div>
-                    <div
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-mono mb-6 border border-emerald-500/20">
-                        <Terminal size={14} />
-                        <span>System.Ready()</span>
+                    {/* Badge */}
+                    <div className="reveal inline-flex items-center gap-2 px-3 py-1 mb-6 border"
+                        style={{
+                            fontFamily: 'var(--font-mono)', fontSize: '.7rem',
+                            color: 'var(--green)', letterSpacing: '.15em', textTransform: 'uppercase',
+                            borderColor: 'rgba(0,255,136,.3)', borderRadius: '2px',
+                            background: 'rgba(0,255,136,.05)',
+                        }}
+                    >
+                        <span className="pulse-dot" />
+                        System.Ready() — Available for hire
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                        Level Up Your <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500">
-                            Game Experience
+
+                    {/* Title */}
+                    <h1
+                        className="reveal reveal-delay-1 mb-6"
+                        style={{
+                            fontFamily: 'var(--font-display)', fontWeight: 900,
+                            fontSize: 'clamp(2.4rem,5vw,3.8rem)', lineHeight: 1.1, color: '#fff',
+                        }}
+                    >
+                        <span className="glitch" data-text={SITE_DATA.profile.name}>
+                            {SITE_DATA.profile.name}
+                        </span>
+                        <span
+                            style={{
+                                display: 'block',
+                                background: 'linear-gradient(90deg, var(--green), var(--blue))',
+                                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                            }}
+                        >
+                            {SITE_DATA.profile.role}
                         </span>
                     </h1>
-                    <p className="text-slate-400 text-lg mb-8 leading-relaxed max-w-lg">
+
+                    {/* Bio */}
+                    <p className="reveal reveal-delay-2 mb-8"
+                        style={{ color: 'var(--text-dim)', fontSize: '1.05rem', lineHeight: 1.75, maxWidth: 480 }}>
                         {SITE_DATA.profile.bio}
                     </p>
-                    <div className="flex gap-4">
-                        <Link to="/projects"
-                            className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium transition-all hover:translate-y-[-2px] flex items-center gap-2">
-                            View All Projects
-                            <ChevronRight size={18} />
-                        </Link>
-                        <a href={SITE_DATA.profile.social.github} target="_blank" rel="noopener noreferrer"
-                            className="bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-lg font-medium transition-all border border-slate-700 flex items-center gap-2">
-                            <Github size={18} /> GitHub
-                        </a>
+
+                    {/* CTA */}
+                    <div className="reveal reveal-delay-3 flex gap-3 flex-wrap">
+                        <Button href="/projects">▶ View Projects <ChevronRight size={16} /></Button>
+                        <Button variant="outline" href={SITE_DATA.social.github} external>
+                            <Github size={16} /> GitHub
+                        </Button>
                     </div>
                 </div>
-                <div className="relative group">
-                    <div
-                        className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000">
-                    </div>
-                    <div className="relative bg-slate-800 rounded-2xl p-8 border border-slate-700 shadow-2xl">
-                        <div className="flex gap-2 mb-4">
-                            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                        </div>
-                        <div className="font-mono text-sm text-slate-300 space-y-2">
-                            <p><span className="text-purple-400">class</span> <span className="text-yellow-300">Developer</span>
-                                &#123;</p>
-                            <p className="pl-4"><span className="text-purple-400">public</span> <span
-                                className="text-blue-400">string</span> Name = <span
-                                    className="text-orange-300">"{SITE_DATA.profile.name}"</span>;</p>
-                            <p className="pl-4"><span className="text-purple-400">public</span> <span
-                                className="text-blue-400">string[]</span> Skills = &#123;</p>
-                            <p className="pl-8"><span className="text-orange-300">"Unity"</span>, <span
-                                className="text-orange-300">"Unreal"</span>, <span className="text-orange-300">"C#"</span>,
-                                <span className="text-orange-300">"C++"</span></p>
-                            <p className="pl-4">&#125;;</p>
-                            <p className="pl-4"><span className="text-purple-400">void</span> <span
-                                className="text-yellow-300">CreateGame</span>() &#123;</p>
-                            <p className="pl-8 text-slate-500">// Magic happens here</p>
-                            <p className="pl-4">&#125;</p>
-                            <p>&#125;</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-};
 
-const Projects = () => {
-    return (
-        <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-            <div className="flex items-center justify-between mb-12">
-                <h2 className="text-3xl font-bold text-white">Selected Projects</h2>
-                <Link to="/projects" className="text-sm text-slate-400 hover:text-white transition-colors">View All Projects &rarr;</Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {SITE_DATA.projects.slice(0, 3).map((project) => (
-                    <div key={project.id}
-                        className="group bg-slate-900 rounded-xl overflow-hidden border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1">
-                        <div className={`h-48 bg-gradient-to-br ${project.imageColor} flex items-center justify-center relative
-                overflow-hidden`}>
-                            <Gamepad2
-                                className="text-white/20 w-32 h-32 absolute transform -rotate-12 group-hover:scale-110 transition-transform duration-500" />
-                            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-                        </div>
-                        <div className="p-6">
-                            <div className="flex flex-wrap gap-2 mb-3">
-                                {project.tags.map((tag, i) => (
-                                    <span key={i}
-                                        className="text-xs font-mono bg-slate-800 text-emerald-400 px-2 py-1 rounded border border-slate-700">
-                                        {tag}
-                                    </span>
-                                ))}
+                {/* Right — Terminal Card */}
+                <TerminalCard
+                    title="developer.cs"
+                    lines={
+                        <div style={{ lineHeight: 2 }}>
+                            <div>{T.keyword('namespace')} {T.val('unchunks')} {T.plain('{')}</div>
+                            <div style={{ paddingLeft: '1.2rem' }}>{T.comment('// Game Developer Profile')}</div>
+                            <div style={{ paddingLeft: '1.2rem' }}>
+                                {T.keyword('public class')} {T.class('Developer')} {T.plain('{')}
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
-                                {project.title}</h3>
-                            <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                                {project.description}
-                            </p>
-                            {/* Use Link component if the link starts with /, otherwise regular a tag */}
-                            {project.link.startsWith('/') ? (
-                                <Link to={project.link}
-                                    className="inline-flex items-center gap-1 text-sm font-medium text-white hover:text-emerald-400 transition-colors">
-                                    View Details
-                                    <ExternalLink size={14} />
-                                </Link>
-                            ) : (
-                                <a href={project.link}
-                                    className="inline-flex items-center gap-1 text-sm font-medium text-white hover:text-emerald-400 transition-colors">
-                                    View Details
-                                    <ExternalLink size={14} />
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </section>
-    );
-};
-
-const Blog = () => {
-    return (
-        <section id="blog"
-            className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto bg-slate-900/50 rounded-3xl mb-20 border border-slate-800/50">
-            <div className="flex items-center justify-between mb-12">
-                <h2 className="text-3xl font-bold text-white flex items-center gap-3">
-                    <Code className="text-emerald-500" /> DevLog
-                </h2>
-                <Link to="/blog" className="text-sm text-slate-400 hover:text-white transition-colors">View All Logs &rarr;</Link>
-            </div>
-
-            <div className="space-y-4">
-                {SITE_DATA.posts.map((post) => (
-                    <div key={post.id}
-                        className="group p-6 rounded-xl bg-slate-950 border border-slate-800 hover:border-slate-600 transition-all cursor-pointer">
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-2">
-                            <div className="flex items-center gap-2 text-xs font-mono text-slate-500">
-                                <Calendar size={12} /> {post.date}
+                            <div style={{ paddingLeft: '2.4rem' }}>
+                                {T.type('string')} Name = {T.string(`"${SITE_DATA.profile.name}"`)};
                             </div>
-                            <span
-                                className="text-xs font-medium px-2 py-0.5 rounded bg-slate-800 text-cyan-400 border border-slate-700 w-fit">
-                                {post.category}
-                            </span>
+                            <div style={{ paddingLeft: '2.4rem' }}>
+                                {T.type('string')} Role = {T.string(`"${SITE_DATA.profile.role}"`)};
+                            </div>
+                            <div style={{ paddingLeft: '2.4rem' }}>
+                                {T.type('string[]')} Skills = {T.plain('{')}
+                            </div>
+                            <div style={{ paddingLeft: '3.6rem' }}>
+                                {T.string('"Unity"')}, {T.string('"Unreal"')},{' '}
+                                {T.string('"C#"')}, {T.string('"C++"')}
+                            </div>
+                            <div style={{ paddingLeft: '2.4rem' }}>{T.plain('};')}</div>
+                            <div style={{ paddingLeft: '2.4rem' }}>
+                                {T.keyword('void')} {T.method('CreateGame')}() {T.plain('{')}
+                            </div>
+                            <div style={{ paddingLeft: '3.6rem' }}>{T.comment('// Magic happens here ✨')}</div>
+                            <div style={{ paddingLeft: '2.4rem' }}>{T.plain('}')}</div>
+                            <div style={{ paddingLeft: '1.2rem' }}>{T.plain('}')}</div>
+                            <div>{T.plain('}')}</div>
+                            <div style={{ marginTop: '.5rem' }} />
                         </div>
-                        <h3 className="text-lg font-bold text-slate-200 group-hover:text-emerald-400 transition-colors mb-2">
-                            {post.title}
-                        </h3>
-                        <p className="text-slate-400 text-sm line-clamp-2">
-                            {post.content}
-                        </p>
-                    </div>
-                ))}
+                    }
+                />
             </div>
-        </section>
-    );
-};
 
-const Footer = () => {
-    return (
-        <footer id="contact" className="bg-slate-950 border-t border-slate-900 py-12">
+            {/* Stats row */}
             <div
-                className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-                <div className="text-center md:text-left">
-                    <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                        <Gamepad2 className="w-5 h-5 text-emerald-500" />
-                        <span className="font-bold text-white text-lg">{SITE_DATA.profile.name}</span>
-                    </div>
-                    <p className="text-slate-500 text-sm">Building worlds, debugging reality.</p>
-                </div>
-
-                <div className="flex gap-6">
-                    <a href={SITE_DATA.profile.social.github} className="text-slate-400 hover:text-white transition-colors">
-                        <Github size={20} />
-                    </a>
-                    <a href={SITE_DATA.profile.social.twitter} className="text-slate-400 hover:text-blue-400 transition-colors">
-                        <Twitter size={20} />
-                    </a>
-                </div>
-
-                <div className="text-slate-600 text-sm">
-                    &copy; {new Date().getFullYear()} {SITE_DATA.profile.name}
-                </div>
+                className="mt-20 reveal"
+                style={{
+                    display: 'grid', gridTemplateColumns: 'repeat(3,1fr)',
+                    gap: '1px', background: 'var(--border)',
+                    border: '1px solid var(--border)',
+                }}
+            >
+                {SITE_DATA.profile.stats.map(s => (
+                    <StatBox key={s.label} value={s.value} suffix={s.suffix ?? ''} label={s.label} />
+                ))}
             </div>
-        </footer>
+        </section>
     );
-};
+}
 
-const Home = () => {
+/* ── Featured Projects ─────────────────────────── */
+function FeaturedProjects() {
+    const ref = useReveal();
     return (
-        <div className="min-h-screen bg-slate-900 text-slate-200 selection:bg-emerald-500/30 selection:text-emerald-200">
-            <Navigation />
-            <Hero />
-            <Projects />
-            <Blog />
-            <Footer />
+        <section id="projects" className="py-20 px-4 sm:px-8 max-w-6xl mx-auto" ref={ref}>
+            <div className="flex items-end justify-between mb-12">
+                <SectionHeader tag="Projects" title="Selected Works" desc="ゲーム開発プロジェクトの作品集です。" />
+                <Link to="/projects"
+                    style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', color: 'var(--text-muted)',
+                             textDecoration: 'none', letterSpacing: '.08em', whiteSpace: 'nowrap', marginBottom: '3rem' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--green)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                >
+                    All Projects →
+                </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {SITE_DATA.projects.slice(0, 3).map((p, i) => (
+                    <ProjectCard key={p.id} project={p} delay={String(i + 1)} />
+                ))}
+            </div>
+        </section>
+    );
+}
+
+/* ── Skills ────────────────────────────────────── */
+function Skills() {
+    const ref = useReveal();
+    return (
+        <section id="skills" className="py-20 px-4 sm:px-8 max-w-6xl mx-auto" ref={ref}>
+            <SectionHeader tag="Skills" title="Tech Stack" desc="ゲーム開発に使用しているエンジンと言語です。" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {SITE_DATA.profile.skills.map((s, i) => (
+                    <SkillBar key={s.name} name={s.name} pct={s.pct}
+                        color={i < 2 ? 'green' : i < 4 ? 'blue' : 'red'} />
+                ))}
+            </div>
+        </section>
+    );
+}
+
+/* ── DevLog preview ────────────────────────────── */
+function DevLogPreview() {
+    const ref = useReveal();
+    const posts = SITE_DATA.posts.slice(0, 3);
+    return (
+        <section id="devlog" className="py-20 px-4 sm:px-8 max-w-6xl mx-auto" ref={ref}>
+            <div className="flex items-end justify-between mb-12">
+                <SectionHeader tag="DevLog" title="Development Log" desc="開発の記録と学びを共有しています。" />
+                <Link to="/blog"
+                    style={{ fontFamily: 'var(--font-mono)', fontSize: '.72rem', color: 'var(--text-muted)',
+                             textDecoration: 'none', letterSpacing: '.08em', whiteSpace: 'nowrap', marginBottom: '3rem' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--green)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                >
+                    All Logs →
+                </Link>
+            </div>
+            {posts.length === 0 ? (
+                <div className="reveal text-center py-16 border border-dashed"
+                    style={{ borderColor: 'var(--border)', borderRadius: '4px', background: 'var(--surface)' }}>
+                    <div style={{ fontSize: '2.5rem', opacity: .35, marginBottom: '.8rem' }}>📝</div>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '.82rem', color: 'var(--text-muted)' }}>
+                        まだ記事がありません。開発ログは随時更新予定です。
+                    </p>
+                </div>
+            ) : (
+                <div className="space-y-4">
+                    {posts.map((post, i) => (
+                        <PostCard key={post.id} post={post} delay={String(i + 1)} />
+                    ))}
+                </div>
+            )}
+        </section>
+    );
+}
+
+function PostCard({ post, delay }) {
+    return (
+        <div className={`reveal reveal-delay-${delay} p-6 group cursor-pointer`}
+            style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '4px',
+                     transition: 'border-color .25s' }}
+            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--border-bright)'}
+            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
+        >
+            <div className="flex flex-wrap items-center gap-3 mb-2">
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', color: 'var(--text-muted)' }}>
+                    📅 {post.date}
+                </span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', color: 'var(--blue)',
+                               padding: '.15rem .5rem', background: 'rgba(0,212,255,.06)',
+                               border: '1px solid rgba(0,212,255,.2)', borderRadius: '2px' }}>
+                    {post.category}
+                </span>
+            </div>
+            <h3 style={{ color: '#fff', fontFamily: 'var(--font-display)', fontSize: '1rem',
+                          fontWeight: 700, marginBottom: '.4rem', transition: 'color .2s' }}
+                className="group-hover:text-[var(--green)]">
+                {post.title}
+            </h3>
+            <p style={{ color: 'var(--text-dim)', fontSize: '.9rem', lineHeight: 1.6 }}>
+                {post.excerpt}
+            </p>
         </div>
     );
-};
+}
 
-export default Home;
+/* ── Page ──────────────────────────────────────── */
+export default function Home() {
+    return (
+        <PageLayout>
+            <Hero />
+            <FeaturedProjects />
+            <Skills />
+            <DevLogPreview />
+        </PageLayout>
+    );
+}

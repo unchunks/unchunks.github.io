@@ -1,133 +1,211 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { SITE_DATA } from '../data';
-import { Gamepad2, Github, Twitter, Menu, X, ArrowLeft } from 'lucide-react';
+/**
+ * src/pages/ProjectDetail.jsx
+ * /projects/:id — 各プロジェクトの詳細ページ
+ * コンテンツは src/content/projects/ で管理します。
+ */
+import React from "react";
+import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, Github } from "lucide-react";
+import { PageLayout } from "../components/common/PageLayout";
+import { Tag } from "../components/ui/Tag";
+import { Button } from "../components/ui/Button";
+import { useReveal } from "../hooks/useReveal";
+import { SITE_DATA } from "../data";
 
-const Navigation = () => {
-    const [isOpen, setIsOpen] = useState(false);
+/* Styles injected once for detail content */
+const DETAIL_STYLES = `
+    .detail-h2 {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--green);
+        margin: 2rem 0 .8rem;
+        letter-spacing: .04em;
+    }
+    .detail-h2::before { content: '> '; color: var(--text-muted); }
+    .detail-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--font-mono);
+        font-size: .77rem;
+    }
+    .detail-table th {
+        background: rgba(0,0,0,.4);
+        color: var(--green);
+        padding: .55rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border-bright);
+        letter-spacing: .06em;
+        font-weight: 700;
+    }
+    .detail-table td {
+        padding: .55rem 1rem;
+        color: var(--text);
+        border-bottom: 1px solid var(--border);
+    }
+    .detail-table tr:hover td { background: rgba(0,255,136,.03); }
+    .detail-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    .detail-list li {
+        color: var(--text-dim);
+        padding-left: 1.2rem;
+        position: relative;
+        line-height: 1.7;
+    }
+    .detail-list li::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        color: var(--green);
+    }
+    .space-y-6 > * + * { margin-top: 1.5rem; }
+    .space-y-8 > * + * { margin-top: 2rem; }
+    .space-y-10 > * + *{ margin-top: 2.5rem; }
+`;
 
-    return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <div className="flex items-center gap-2">
-                        <Link to="/" className="flex items-center gap-2">
-                            <Gamepad2 className="w-6 h-6 text-emerald-400" />
-                            <span className="font-bold text-xl text-white tracking-wider font-mono">
-                                {SITE_DATA.profile.name}
-                            </span>
-                        </Link>
-                    </div>
-
-                    <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-8">
-                            <Link to="/projects" className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">All Projects</Link>
-                            <Link to="/#blog" className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">DevLog</Link>
-                            <Link to="/contact" className="text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</Link>
-                        </div>
-                    </div>
-
-                    <div className="md:hidden">
-                        <button onClick={() => setIsOpen(!isOpen)} className="text-slate-300 hover:text-white p-2">
-                            {isOpen ? <X /> : <Menu />}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden bg-slate-900 border-b border-slate-800">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <Link to="/projects" className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">All Projects</Link>
-                        <Link to="/#blog" className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">DevLog</Link>
-                        <Link to="/contact" className="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</Link>
-                    </div>
-                </div>
-            )}
-        </nav>
-    );
-};
-
-const Footer = () => {
-    return (
-        <footer id="contact" className="bg-slate-950 border-t border-slate-900 py-12 mt-20">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-                <div className="text-center md:text-left">
-                    <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                        <Gamepad2 className="w-5 h-5 text-emerald-500" />
-                        <span className="font-bold text-white text-lg">{SITE_DATA.profile.name}</span>
-                    </div>
-                    <p className="text-slate-500 text-sm">Building worlds, debugging reality.</p>
-                </div>
-
-                <div className="flex gap-6">
-                    <a href={SITE_DATA.profile.social.github} className="text-slate-400 hover:text-white transition-colors">
-                        <Github size={20} />
-                    </a>
-                    <a href={SITE_DATA.profile.social.twitter} className="text-slate-400 hover:text-blue-400 transition-colors">
-                        <Twitter size={20} />
-                    </a>
-                </div>
-
-                <div className="text-slate-600 text-sm">
-                    &copy; {new Date().getFullYear()} {SITE_DATA.profile.name}
-                </div>
-            </div>
-        </footer>
-    );
-};
-
-const ProjectDetail = () => {
+export default function ProjectDetail() {
     const { id } = useParams();
-    const project = SITE_DATA.projects.find(p => p.id.toString() === id);
+    const ref = useReveal();
+    const project = SITE_DATA.projects.find((p) => p.id === id);
 
     if (!project) {
         return (
-            <div className="min-h-screen bg-slate-900 text-slate-200 flex items-center justify-center">
-                <div className="text-center">
-                    <h1 className="text-4xl font-bold text-white mb-4">Project Not Found</h1>
-                    <Link to="/" className="text-emerald-400 hover:text-emerald-300">Return Home</Link>
+            <PageLayout>
+                <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
+                    <h1
+                        style={{
+                            fontFamily: "var(--font-display)",
+                            fontSize: "2rem",
+                            color: "#fff",
+                        }}
+                    >
+                        Project Not Found
+                    </h1>
+                    <Button href="/projects">← All Projects</Button>
                 </div>
-            </div>
+            </PageLayout>
         );
     }
 
     return (
-        <div className="min-h-screen bg-slate-900 text-slate-200 selection:bg-emerald-500/30 selection:text-emerald-200">
-            <Navigation />
-
-            <main className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-                <Link to="/projects" className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-8 transition-colors">
-                    <ArrowLeft size={20} /> Back to All Projects
+        <PageLayout>
+            <style>{DETAIL_STYLES}</style>
+            <main
+                className="pt-32 pb-16 px-4 sm:px-8 max-w-4xl mx-auto"
+                ref={ref}
+            >
+                {/* Back */}
+                <Link
+                    to="/projects"
+                    className="inline-flex items-center gap-2 mb-8 no-underline reveal"
+                    style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: ".75rem",
+                        color: "var(--text-dim)",
+                        letterSpacing: ".08em",
+                        transition: "color .2s",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+                    onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "var(--text-dim)")
+                    }
+                >
+                    <ArrowLeft size={16} /> Back to All Projects
                 </Link>
 
-                <article>
-                    <div className={`h-64 rounded-2xl bg-gradient-to-br ${project.imageColor} flex items-center justify-center mb-10 relative overflow-hidden`}>
-                        <Gamepad2 className="text-white/20 w-32 h-32 absolute transform -rotate-12" />
-                        <div className="absolute inset-0 bg-black/10"></div>
-                        <h1 className="text-4xl md:text-6xl font-bold text-white relative z-10 drop-shadow-lg">{project.title}</h1>
-                    </div>
+                {/* Hero banner */}
+                <div
+                    className="reveal h-56 rounded flex items-center justify-center relative overflow-hidden mb-10"
+                    style={{
+                        background:
+                            project.thumbBg ??
+                            "linear-gradient(135deg,#0a1530,#1a2560)",
+                    }}
+                >
+                    {/* Grid */}
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            backgroundImage:
+                                "linear-gradient(rgba(0,255,136,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,.05) 1px,transparent 1px)",
+                            backgroundSize: "30px 30px",
+                        }}
+                    />
+                    {/* Glow */}
+                    {project.thumbGlow && (
+                        <div
+                            className="absolute inset-0 opacity-40"
+                            style={{ background: project.thumbGlow }}
+                        />
+                    )}
+                    {/* Icon */}
+                    <span
+                        className="relative z-10"
+                        style={{
+                            fontSize: "5rem",
+                            filter: "drop-shadow(0 0 30px currentColor)",
+                        }}
+                    >
+                        {project.icon ?? "🎮"}
+                    </span>
+                    {/* Title overlay */}
+                    <h1
+                        className="absolute bottom-6 left-8"
+                        style={{
+                            fontFamily: "var(--font-display)",
+                            fontWeight: 900,
+                            fontSize: "clamp(1.8rem,4vw,3rem)",
+                            color: "#fff",
+                            textShadow: "0 2px 20px rgba(0,0,0,.8)",
+                        }}
+                    >
+                        {project.title}
+                    </h1>
+                </div>
 
-                    <div className="flex flex-wrap gap-2 mb-8">
-                        {project.tags.map((tag, i) => (
-                            <span key={i} className="text-sm font-mono bg-slate-800 text-emerald-400 px-3 py-1 rounded border border-slate-700">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-8 reveal reveal-delay-1">
+                    {project.tags.map((tag) => (
+                        <Tag key={tag}>{tag}</Tag>
+                    ))}
+                </div>
 
-                    <div className="prose prose-invert max-w-none">
-                        {project.details ? project.details : (
-                            <p className="text-slate-300 text-lg leading-relaxed">{project.description}</p>
-                        )}
+                {/* Detail content */}
+                <div className="reveal reveal-delay-2">
+                    {project.details ? (
+                        // 関数なら実行し、そうでない（古い記法の）場合はそのまま描画する安全な書き方
+                        typeof project.details === "function" ? (
+                            project.details()
+                        ) : (
+                            project.details
+                        )
+                    ) : (
+                        <p
+                            style={{
+                                color: "var(--text-dim)",
+                                lineHeight: 1.8,
+                                fontSize: "1.05rem",
+                            }}
+                        >
+                            {project.description}
+                        </p>
+                    )}
+                </div>
+
+                {/* GitHub link */}
+                {project.githubUrl && (
+                    <div className="mt-10 reveal reveal-delay-3">
+                        <Button href={project.githubUrl} external>
+                            <Github size={16} /> ソースコードを GitHub で見る
+                        </Button>
                     </div>
-                </article>
+                )}
             </main>
-
-            <Footer />
-        </div>
+        </PageLayout>
     );
-};
-
-export default ProjectDetail;
+}
