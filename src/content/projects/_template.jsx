@@ -59,14 +59,21 @@ export const project_TEMPLATE = {
 
     /* ── 外部リンク（任意・不要な行は削除してください） ── */
 
-    /** GitHub リポジトリ URL */
-    githubUrl: 'https://github.com/unchunks/my-game',
+    /** GitHub リポジトリ URL（githubUrl のみの場合はこちらでも可） */
+    // githubUrl: 'https://github.com/unchunks/my-game',
 
-    /** ゲームのプレイページ（itch.io など） */
-    // playUrl: 'https://unchunks.itch.io/my-game',
-
-    /** Steam ストアページ */
-    // steamUrl: 'https://store.steampowered.com/app/XXXXXX',
+    /**
+     * 外部リンクボタン（詳細ページ下部に横並びで表示）
+     * githubUrl より links を推奨（複数ボタンを並べられる）
+     * type: 'github' | 'itchio' | 'steam' | 'play' | 'web'
+     */
+    links: [
+        // { label: 'itch.io でプレイ', url: 'https://unchunks.itch.io/my-game',               type: 'itchio' },
+        // { label: 'Steam',            url: 'https://store.steampowered.com/app/XXXXXX',       type: 'steam'  },
+        // { label: 'ソースコードを見る', url: 'https://github.com/unchunks/my-game',           type: 'github' },
+        // { label: 'ブラウザでプレイ',  url: 'https://unchunks.itch.io/my-game',              type: 'play'   },
+        // { label: '公式サイト',        url: 'https://example.com',                            type: 'web'    },
+    ],
 
 
     /* ── 詳細ページコンテンツ（必須） ──────────────────── */
@@ -89,7 +96,7 @@ export const project_TEMPLATE = {
      *   var(--font-mono)   … 等幅フォント
      *   var(--font-display)… 見出しフォント
      */
-    details: () => (
+    details: (
         <div className="space-y-10">
 
             {/* ── リード文（ページ冒頭の概要） ────────────── */}

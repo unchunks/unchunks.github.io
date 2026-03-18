@@ -20,36 +20,60 @@ function useTilt(ref) {
     return { onMouseMove: handleMove, onMouseLeave: handleLeave };
 }
 
+/** パス文字列かどうかを判定（絵文字との区別） */
+const isPath = (v) => typeof v === 'string' && (v.startsWith('/') || v.startsWith('.') || v.startsWith('http'));
+
 export function ProjectCard({ project, delay = '' }) {
     const cardRef = useRef(null);
     const tilt    = useTilt(cardRef);
 
-    const innerContent = (
+    const Inner = () => (
         <>
             {/* Thumbnail */}
             <div
                 className="h-44 flex items-center justify-center relative overflow-hidden"
                 style={{ background: project.thumbBg ?? 'linear-gradient(135deg,#0a1530,#1a2560)' }}
             >
-                {/* Grid lines */}
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage: 'linear-gradient(rgba(0,255,136,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,.04) 1px,transparent 1px)',
-                        backgroundSize: '30px 30px',
-                    }}
-                />
-                {/* Glow */}
-                {project.thumbGlow && (
-                    <div className="absolute inset-0 opacity-30" style={{ background: project.thumbGlow }} />
+                {/* thumbImage がある場合は実画像をフルカバー表示 */}
+                {project.thumbImage ? (
+                    <img
+                        src={project.thumbImage}
+                        alt={project.title}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        style={{ opacity: .85 }}
+                    />
+                ) : (
+                    <>
+                        {/* Grid lines */}
+                        <div
+                            className="absolute inset-0"
+                            style={{
+                                backgroundImage: 'linear-gradient(rgba(0,255,136,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,.04) 1px,transparent 1px)',
+                                backgroundSize: '30px 30px',
+                            }}
+                        />
+                        {/* Glow */}
+                        {project.thumbGlow && (
+                            <div className="absolute inset-0 opacity-30" style={{ background: project.thumbGlow }} />
+                        )}
+                        {/* Icon — 絵文字 or 画像パス */}
+                        {isPath(project.icon) ? (
+                            <img
+                                src={project.icon}
+                                alt={project.title}
+                                className="relative z-10 w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-110"
+                                style={{ filter: 'drop-shadow(0 0 16px rgba(255,255,255,.4))' }}
+                            />
+                        ) : (
+                            <span
+                                className="relative z-10 text-6xl transition-transform duration-300 group-hover:scale-110"
+                                style={{ filter: 'drop-shadow(0 0 20px currentColor)' }}
+                            >
+                                {project.icon ?? '🎮'}
+                            </span>
+                        )}
+                    </>
                 )}
-                {/* Icon */}
-                <span
-                    className="relative z-10 text-6xl transition-transform duration-300 group-hover:scale-110"
-                    style={{ filter: 'drop-shadow(0 0 20px currentColor)' }}
-                >
-                    {project.icon ?? '🎮'}
-                </span>
             </div>
 
             {/* Body */}
@@ -110,7 +134,7 @@ export function ProjectCard({ project, delay = '' }) {
                 e.currentTarget.style.transform   = '';
             }}
         >
-            {innerContent}
+            <Inner />
         </Link>
     );
 }

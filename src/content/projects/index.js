@@ -18,12 +18,14 @@
 
 import { vialactea } from './vialactea';
 import { rogue }     from './rogue';
-// import { eneme }  from './eneme';      ← コメントを外すと有効化
+// import { eneme }  from './eneme';
+import { reversist } from './reversist';
 // import { mynewgame } from './mynewgame'; ← 新しいゲームはここに追加
 
 export const allProjects = [
     rogue,
     vialactea,
     // eneme,
+    reversist,
     // mynewgame,
 ];
