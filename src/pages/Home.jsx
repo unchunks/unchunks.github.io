@@ -237,12 +237,13 @@ function PostCard({ post, delay }) {
 }
 
 /* ── Page ──────────────────────────────────────── */
+/* <Skills /> */
 export default function Home() {
     return (
         <PageLayout>
             <Hero />
             <FeaturedProjects />
-            <Skills />
+            
             <DevLogPreview />
         </PageLayout>
     );
