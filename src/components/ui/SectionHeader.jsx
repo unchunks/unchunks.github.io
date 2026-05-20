@@ -14,7 +14,7 @@ export function SectionHeader({ tag, title, desc, className = '' }) {
                 className="flex items-center gap-3 mb-2 uppercase tracking-widest"
                 style={{ fontFamily: 'var(--font-mono)', fontSize: '.68rem', color: 'var(--green)' }}
             >
-                <span style={{ color: 'var(--text-muted)' }}>//</span>
+                <span style={{ color: 'var(--text-muted)' }}>{'// '}</span>
                 {tag}
             </div>
             <h2

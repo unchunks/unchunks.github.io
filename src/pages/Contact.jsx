@@ -78,7 +78,7 @@ function Group({ title, links }) {
                     color: 'var(--text-muted)', letterSpacing: '.2em', textTransform: 'uppercase',
                 }}
             >
-                // {title}
+                {'// '} {title}
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
                 {links.map((link, i) => (
