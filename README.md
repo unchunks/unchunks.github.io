@@ -2,6 +2,7 @@
 
 ゲーム開発者 unchunks のポートフォリオサイト。  
 React + Vite + Tailwind CSS で構築されています。
+https://unchunks.github.io
 
 ---
 
